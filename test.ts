@@ -11,6 +11,7 @@ Deno.test('strpos', function() {
   assertEquals(strpos('foo', 'o'), 1);
   assertEquals(strpos('foo', 'b'), false);
   assertEquals(strpos('foo bar buz', 'bar'), 4);
+  assertEquals(strpos('foo bar buz', 'b', 5), 8, 'using offset');
 });
 
 Deno.test('substr', function() {

@@ -4,7 +4,7 @@
 // @link https://www.php.net/manual/en/function.strpos.php
 
 function strpos(haystack:string, needle:string, offset:number=0) :number|false {
-  const pos = haystack.indexOf(needle);
+  const pos = haystack.indexOf(needle, offset);
   if (pos == -1) {
     return false;
   }
