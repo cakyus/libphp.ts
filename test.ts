@@ -5,6 +5,7 @@ import {
    strpos
  , strrpos
  , substr
+ , basename
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -29,5 +30,11 @@ Deno.test('substr', function() {
   assertEquals(substr('foo', 0, -1), 'fo', 'negative length');
   assertEquals(substr('foo', -1), 'o', 'negative offset 1');
   assertEquals(substr('foo', -2), 'oo', 'negative offset 2');
+});
+
+Deno.test('basename', function() {
+  assertEquals(basename('/c/data.csv'), 'data.csv', 'basename');
+  assertEquals(basename('/c/data.csv', '.csv'), 'data', 'using suffix');
+  assertEquals(basename('/c/data.csv', '.txt'), 'data.csv', 'invalid suffix');
 });
 

@@ -51,9 +51,32 @@ function substr(s:string, offset:number, length:number=0) :string {
   return t;
 }
 
+function basename(path:string, suffix:string='') :string {
+
+  let name :string = '';
+  const pos1 = strrpos(path, '/');
+  if (pos1 === false) {
+    name = path;
+  } else {
+    name = substr(path, pos1 + 1);
+  }
+
+  if (suffix.length > 0) {
+    const pos2 = strrpos(name, suffix);
+    if (pos2 === false) {
+      // do nothing
+    } else {
+      name = substr(name, 0, pos2);
+    }
+  }
+
+  return name;
+}
+
 export {
    strpos
  , strrpos
  , substr
+ , basename
 };
 
