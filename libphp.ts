@@ -11,6 +11,19 @@ function strpos(haystack:string, needle:string, offset:number=0) :number|false {
   return pos;
 }
 
+// Find the position of the last occurrence of a substring in a string.
+
+function strrpos(haystack:string, needle:string, offset:number=0) :number|false {
+  // reverse haystack and needle
+  haystack = haystack.split('').reverse().join('');
+  needle = needle.split('').reverse().join('');
+  const pos = haystack.indexOf(needle, offset);
+  if (pos == -1) {
+    return false;
+  }
+  return haystack.length - needle.length - pos;
+}
+
 // Return part of string
 
 function substr(s:string, offset:number, length:number=0) :string {
@@ -40,6 +53,7 @@ function substr(s:string, offset:number, length:number=0) :string {
 
 export {
    strpos
+ , strrpos
  , substr
 };
 

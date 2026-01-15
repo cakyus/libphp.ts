@@ -3,6 +3,7 @@
 import { assertEquals } from "jsr:@std/assert";
 import {
    strpos
+ , strrpos
  , substr
 } from "./libphp.ts";
 
@@ -12,6 +13,14 @@ Deno.test('strpos', function() {
   assertEquals(strpos('foo', 'b'), false);
   assertEquals(strpos('foo bar buz', 'bar'), 4);
   assertEquals(strpos('foo bar buz', 'b', 5), 8, 'using offset');
+});
+
+Deno.test('strrpos', function() {
+  assertEquals(strrpos('fooz', 'f'), 0, 'at begining');
+  assertEquals(strrpos('fooz', 'o'), 2, 'at end');
+  assertEquals(strrpos('fooz', 'b'), false, 'not exists');
+  assertEquals(strrpos('fooz barz buzz', 'bar'), 5, 'search word');
+  assertEquals(strrpos('fooz barz buzz', 'b', 6), 5, 'using offset');
 });
 
 Deno.test('substr', function() {
