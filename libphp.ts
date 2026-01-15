@@ -19,11 +19,23 @@ function substr(s:string, offset:number, length:number=0) :string {
     length = s.length;
   }
 
-  if (offset < 0) {
-    offset = s.length + offset
+  let begin_index = offset;
+  let end_index = length;
+
+  if (begin_index < 0) {
+    begin_index = s.length + begin_index
   }
 
-  return s.substring(offset, offset + length);
+  if (end_index < 0) {
+    end_index = s.length + end_index
+  }
+
+  let t = '';
+  for (let i = begin_index; i < end_index; i++) {
+    t += s[i];
+  }
+
+  return t;
 }
 
 export {

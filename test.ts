@@ -14,7 +14,10 @@ Deno.test('strpos', function() {
 });
 
 Deno.test('substr', function() {
-  assertEquals(substr('foo', 0, 1), 'f');
-  assertEquals(substr('foo', 1), 'oo');
+  assertEquals(substr('foo', 0, 1), 'f', 'substr');
+  assertEquals(substr('foo', 1), 'oo', 'no length');
+  assertEquals(substr('foo', 0, -1), 'fo', 'negative length');
+  assertEquals(substr('foo', -1), 'o', 'negative offset 1');
+  assertEquals(substr('foo', -2), 'oo', 'negative offset 2');
 });
 

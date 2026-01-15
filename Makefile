@@ -1,3 +1,3 @@
 .PHONY:test
 test:
-	deno test
+	NO_COLOR=1 deno test
