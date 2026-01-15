@@ -51,9 +51,16 @@ function substr(s:string, offset:number, length:number=0) :string {
   return t;
 }
 
+// Returns trailing name component of path.
+
 function basename(path:string, suffix:string='') :string {
 
   let name :string = '';
+
+  if (substr(path, -1) == '/') {
+    path = substr(path, 0, -1);
+  }
+
   const pos1 = strrpos(path, '/');
   if (pos1 === false) {
     name = path;

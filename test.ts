@@ -36,5 +36,8 @@ Deno.test('basename', function() {
   assertEquals(basename('/c/data.csv'), 'data.csv', 'basename');
   assertEquals(basename('/c/data.csv', '.csv'), 'data', 'using suffix');
   assertEquals(basename('/c/data.csv', '.txt'), 'data.csv', 'invalid suffix');
+  assertEquals(basename('/c/data/'), 'data', 'directory');
+  assertEquals(basename('.'), '.', 'a dot');
+  assertEquals(basename('/'), '', 'a slash');
 });
 
