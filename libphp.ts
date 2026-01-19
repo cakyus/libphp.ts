@@ -80,10 +80,29 @@ function basename(path:string, suffix:string='') :string {
   return name;
 }
 
+// @params string text
+// @params bool associative optional
+// @params int depth default 512
+// @params int flags default 0
+
+function json_decode(text:string) :object {
+  // remove NULL char at the end
+  if (text.charCodeAt(text.length - 1) == 0) {
+    text = text.substring(0, text.length - 1);
+  }
+  return JSON.parse(text);
+}
+
+function json_encode(data:object) :string {
+  return JSON.stringify(data);
+}
+
 export {
    strpos
  , strrpos
  , substr
  , basename
+ , json_decode
+ , json_encode
 };
 
