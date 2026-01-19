@@ -1,6 +1,11 @@
 // libphp.ts
 
 // Find the position of the first occurrence of a substring in a string.
+// 
+// @param string haystack
+// @param string needle
+// @param int offset default 0
+// @return int|false
 // @link https://www.php.net/manual/en/function.strpos.php
 
 function strpos(haystack:string, needle:string, offset:number=0) :number|false {
@@ -12,6 +17,12 @@ function strpos(haystack:string, needle:string, offset:number=0) :number|false {
 }
 
 // Find the position of the last occurrence of a substring in a string.
+//
+// @param string haystack
+// @param string needle
+// @param int offset default 0
+// @return int|false
+// @link https://www.php.net/manual/en/function.strrpos.php
 
 function strrpos(haystack:string, needle:string, offset:number=0) :number|false {
   // reverse haystack and needle
@@ -25,6 +36,12 @@ function strrpos(haystack:string, needle:string, offset:number=0) :number|false 
 }
 
 // Return part of string
+// 
+// @param string string
+// @param int offset
+// @param int length default null
+// @return string
+// @link https://www.php.net/manual/en/function.substr.php
 
 function substr(s:string, offset:number, length:number=0) :string {
 
@@ -52,6 +69,11 @@ function substr(s:string, offset:number, length:number=0) :string {
 }
 
 // Returns trailing name component of path.
+//
+// @param string path
+// @param string suffix default ''
+// @return string
+// @link https://www.php.net/manual/en/function.basename.php
 
 function basename(path:string, suffix:string='') :string {
 
@@ -80,10 +102,14 @@ function basename(path:string, suffix:string='') :string {
   return name;
 }
 
+// Decodes a JSON string
+//
 // @params string text
 // @params bool associative optional
 // @params int depth default 512
 // @params int flags default 0
+// @return mixed
+// @link https://www.php.net/manual/en/function.json-decode.php
 
 function json_decode(text:string) :object {
   // remove NULL char at the end
@@ -92,6 +118,14 @@ function json_decode(text:string) :object {
   }
   return JSON.parse(text);
 }
+
+// Returns the JSON representation of a value
+//
+// @param mixed value
+// @param int flag default 0
+// @param int depth default 512
+// @return string|false
+// @link https://www.php.net/manual/en/function.json-encode.php
 
 function json_encode(data:object) :string {
   return JSON.stringify(data);
