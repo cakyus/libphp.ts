@@ -175,6 +175,18 @@ function rawurlencode(s:string) :string {
     ;
 }
 
+// Return current Unix timestamp
+//
+// @return int
+// @link https://www.php.net/manual/en/function.time.php
+
+function time() :number {
+  const d = new Date();
+  // use floor() to avoid returning time in the future
+  return Math.floor(d.getTime() / 1000);
+}
+
+
 export {
    strpos
  , strrpos
@@ -184,5 +196,6 @@ export {
  , json_encode
  , urlencode
  , rawurlencode
+ , time
 };
 

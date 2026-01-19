@@ -69,3 +69,7 @@ Deno.test('rawurlencode', function() {
     , '%7B%5B%7D%5D%7C%5C%3A%3B%22%27%3C%2C%3E.%3F%2F%20', 'symbol 2');
 });
 
+Deno.test('time', function() {
+
+});
+
