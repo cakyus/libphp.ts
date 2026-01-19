@@ -131,6 +131,50 @@ function json_encode(data:object) :string {
   return JSON.stringify(data);
 }
 
+// URL-encodes string
+//
+// It is encoded the same way that the posted data from a WWW form is encoded,
+// that is the same way as in application/x-www-form-urlencoded media type.
+//
+// This differs from the RFC 3986 encoding (see rawurlencode())
+// in that for historical reasons, spaces are encoded as plus (+) signs.
+//
+// @param string string
+// @return string
+// @link https://www.php.net/manual/en/function.urlencode.php
+
+function urlencode(s:string) :string {
+  return encodeURIComponent(s)
+    .replace('%20','+')
+    .replace('!','%21')
+    .replace('*','%2A')
+    .replace('(','%28')
+    .replace(')','%29')
+    .replace('~','%7E')
+    .replace('\'','%27')
+    ;
+}
+
+// URL-encode according to RFC 3986
+//
+// Used for protecting literal characters from being interpreted as special URL
+// delimiters, and for protecting URLs from being mangled by transmission media
+// with character conversions (like some email systems).
+//
+// @param string string
+// @return string
+// @link https://www.php.net/manual/en/function.rawurlencode.php
+
+function rawurlencode(s:string) :string {
+  return encodeURIComponent(s)
+    .replace('!','%21')
+    .replace('*','%2A')
+    .replace('(','%28')
+    .replace(')','%29')
+    .replace('\'','%27')
+    ;
+}
+
 export {
    strpos
  , strrpos
@@ -138,5 +182,7 @@ export {
  , basename
  , json_decode
  , json_encode
+ , urlencode
+ , rawurlencode
 };
 

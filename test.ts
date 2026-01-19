@@ -6,6 +6,8 @@ import {
  , strrpos
  , substr
  , basename
+ , urlencode
+ , rawurlencode
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -39,5 +41,31 @@ Deno.test('basename', function() {
   assertEquals(basename('/c/data/'), 'data', 'directory');
   assertEquals(basename('.'), '.', 'a dot');
   assertEquals(basename('/'), '', 'a slash');
+});
+
+Deno.test('urlencode', function() {
+  assertEquals(urlencode('abcdefghijklmnopqrstuvwxyz')
+    , 'abcdefghijklmnopqrstuvwxyz', 'lower alpha');
+  assertEquals(urlencode('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    , 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'upper alpha');
+  assertEquals(urlencode('0123456789')
+    , '0123456789', 'digit');
+  assertEquals(urlencode('!@#$%^&*()_+~`_-+=')
+    , '%21%40%23%24%25%5E%26%2A%28%29_%2B%7E%60_-%2B%3D', 'symbol 1');
+  assertEquals(urlencode('{[}]|\\:;"\'<,>.?/ ')
+    , '%7B%5B%7D%5D%7C%5C%3A%3B%22%27%3C%2C%3E.%3F%2F+', 'symbol 2');
+});
+
+Deno.test('rawurlencode', function() {
+  assertEquals(rawurlencode('abcdefghijklmnopqrstuvwxyz')
+    , 'abcdefghijklmnopqrstuvwxyz', 'lower alpha');
+  assertEquals(rawurlencode('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    , 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'upper alpha');
+  assertEquals(rawurlencode('0123456789')
+    , '0123456789', 'digit');
+  assertEquals(rawurlencode('!@#$%^&*()_+~`_-+=')
+    , '%21%40%23%24%25%5E%26%2A%28%29_%2B~%60_-%2B%3D', 'symbol 1');
+  assertEquals(rawurlencode('{[}]|\\:;"\'<,>.?/ ')
+    , '%7B%5B%7D%5D%7C%5C%3A%3B%22%27%3C%2C%3E.%3F%2F%20', 'symbol 2');
 });
 
