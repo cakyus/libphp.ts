@@ -193,6 +193,61 @@ function time() :number {
   return Math.floor(d.getTime() / 1000);
 }
 
+// @param float num
+// @param int decimal default 0
+// @param string decimal_separator default "."
+// @param string thousands_separator default ","
+// @return string
+// @link https://www.php.net/manual/en/function.number-format.php
+
+function number_format(
+    n:number
+  , decimal:number = 0
+  , decimal_separator:string = '.'
+  , thousands_separator:string = ','
+  ) :string {
+
+  // split integer and decimal
+  const s1 = n.toString().split('.');
+  let sinteger = s1[0];
+  let sdecimal = '';
+  if (s1.length == 2) {
+    sdecimal = s1[1];
+  }
+
+  // resize sdecimal according to decimal
+  sdecimal = sdecimal.substring(0, decimal);
+  if (sdecimal.length < decimal) {
+    // add '0' s
+    sdecimal = sdecimal + '0'.repeat(decimal - sdecimal.length);
+  }
+
+  // add thousand separator
+  let s :string = '';
+  let end_index :number = sinteger.length;
+  let begin_index :number = end_index - 3;
+  const counter :number = Math.ceil(sinteger.length / 3);
+  for (let i = 0; i < counter; i++) {
+    if (begin_index < 0) {
+      begin_index = 0;
+    }
+    if (i > 0) {
+      s = sinteger.substring(begin_index, end_index)
+        + thousands_separator + s;
+    } else {
+      s = sinteger.substring(begin_index, end_index);
+    }
+    begin_index = begin_index - 3;
+    end_index = end_index - 3;
+  }
+  sinteger = s;
+
+  if (sdecimal.length > 0) {
+    return sinteger + decimal_separator + sdecimal;
+  } else {
+    return sinteger;
+  }
+}
 
 export {
    strpos
@@ -204,5 +259,6 @@ export {
  , urlencode
  , rawurlencode
  , time
+ , number_format
 };
 

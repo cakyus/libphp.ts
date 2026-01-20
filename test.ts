@@ -8,6 +8,7 @@ import {
  , basename
  , urlencode
  , rawurlencode
+ , number_format
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -72,5 +73,12 @@ Deno.test('rawurlencode', function() {
 
 Deno.test('time', function() {
 
+});
+
+Deno.test('number_format', function() {
+  assertEquals(number_format(1.568, 2), '1.56', 'number_format');
+  assertEquals(number_format(128.85, 2), '128.85', 'number_format');
+  assertEquals(number_format(3092.4, 2), '3,092.40', 'number_format');
+  assertEquals(number_format(91025, 2), '91,025.00', 'number_format');
 });
 
