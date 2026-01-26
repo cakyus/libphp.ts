@@ -9,6 +9,8 @@ import {
  , urlencode
  , rawurlencode
  , number_format
+ , intval
+ , ctype_digit
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -76,9 +78,29 @@ Deno.test('time', function() {
 });
 
 Deno.test('number_format', function() {
-  assertEquals(number_format(1.568, 2), '1.56', 'number_format');
-  assertEquals(number_format(128.85, 2), '128.85', 'number_format');
-  assertEquals(number_format(3092.4, 2), '3,092.40', 'number_format');
-  assertEquals(number_format(91025, 2), '91,025.00', 'number_format');
+  assertEquals(number_format(1.568, 2), '1.56');
+  assertEquals(number_format(128.85, 2), '128.85');
+  assertEquals(number_format(3092.4, 2), '3,092.40');
+  assertEquals(number_format(91025, 2), '91,025.00');
+});
+
+Deno.test('intval', function() {
+  assertEquals(intval(42), 42, "intval(42)");
+  assertEquals(intval(4.7), 4, "intval(4.7)");
+  assertEquals(intval('42'), 42, "intval('42')");
+  assertEquals(intval('+42'), 42, "intval('+42')");
+  assertEquals(intval('-42'), -42, "intval('-42')");
+  assertEquals(intval('4.7'), 4, "intval('4.7')");
+  assertEquals(intval(true), 1, "intval(true)");
+  assertEquals(intval(false), 0, "intval(false)");
+});
+
+Deno.test('ctype_digit', function() {
+  assertEquals(ctype_digit('1820.20'), false, "ctype_digit('1820.20')");
+  assertEquals(ctype_digit('10002'), true, "ctype_digit('10002')");
+  assertEquals(ctype_digit('wsl!12'), false, "ctype_digit('wsl!12')");
+  assertEquals(ctype_digit(true), false, "ctype_digit(true)");
+  assertEquals(ctype_digit(false), false, "ctype_digit(false)");
+  assertEquals(ctype_digit(null), false, "ctype_digit(null)");
 });
 

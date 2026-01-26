@@ -1,7 +1,7 @@
 // libphp.ts
 
 // Find the position of the first occurrence of a substring in a string.
-// 
+//
 // @param string haystack
 // @param string needle
 // @param int offset default 0
@@ -36,7 +36,7 @@ function strrpos(haystack:string, needle:string, offset:number=0) :number|false 
 }
 
 // Return part of string
-// 
+//
 // @param string string
 // @param int offset
 // @param int length default null
@@ -249,6 +249,46 @@ function number_format(
   }
 }
 
+// Get the integer value of a variable
+//
+// @param mixed value
+// @param int base default 10
+// @return int
+// @link https://www.php.net/manual/en/function.intval.php
+
+function intval(value:any) :number {
+
+  if (typeof(value) == 'number') {
+    return Math.floor(value);
+  } else if (typeof(value) == 'string') {
+    return parseInt(value);
+  } else if (typeof(value) == 'boolean') {
+    if (value) {
+      return 1;
+    }
+    return 0;
+  } else {
+    return 0;
+  }
+}
+
+// Check for numeric character(s)
+//
+// @param mixed text
+// @return boolean
+// @link https://www.php.net/manual/en/function.ctype-digit.php
+
+function ctype_digit(text:any) :boolean {
+
+  if (typeof(text) == 'string') {
+    if (text.match(/^[0-9]+$/) !== null) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export {
    strpos
  , strrpos
@@ -260,5 +300,7 @@ export {
  , rawurlencode
  , time
  , number_format
+ , intval
+ , ctype_digit
 };
 
