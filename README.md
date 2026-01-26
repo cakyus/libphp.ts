@@ -3,5 +3,5 @@
 Implemented Functions
 
     strpos strrpos substr basename json_decode json_encode urlencode
-    rawurlencode time number_format intval ctype_digit implode
+    rawurlencode time number_format intval ctype_digit implode range
 

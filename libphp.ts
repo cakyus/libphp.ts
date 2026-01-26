@@ -296,8 +296,32 @@ function ctype_digit(text:any) :boolean {
 // @return string
 // @link https://www.php.net/manual/en/function.implode.php
 
-function implode(separator:string, data:Array<string>) :string {
+function implode(separator:string, data:Array<number|string>) :string {
   return data.join(separator);
+}
+
+function range(
+    start:number|string
+  , end:number|string
+  , step:number=1
+  ) :Array<number>|Array<string> {
+
+
+  if (typeof(start) == 'number' && typeof(end) == 'number') {
+    const data :Array<number> = [];
+    for (let i = start; i < end + 1; i = i + step) {
+      data.push(i);
+    }
+    return data;
+  } else if (typeof(start) == 'string' && typeof(end) == 'string') {
+    const data :Array<string> = [];
+    for (let i = start.charCodeAt(0); i < end.charCodeAt(0) + 1; i = i + step) {
+      data.push(String.fromCharCode(i));
+    }
+    return data;
+  } else {
+    throw new Error('start and end must both number or string.');
+  }
 }
 
 export {
@@ -314,5 +338,6 @@ export {
  , intval
  , ctype_digit
  , implode
+ , range
 };
 

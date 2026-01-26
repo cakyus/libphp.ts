@@ -12,6 +12,7 @@ import {
  , intval
  , ctype_digit
  , implode
+ , range
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -107,5 +108,28 @@ Deno.test('ctype_digit', function() {
 
 Deno.test('implode', function() {
   assertEquals(implode(',', ['a','b']), 'a,b', "implode(',', ['a','b'])");
+});
+
+Deno.test('range', function() {
+  assertEquals(
+      implode(',',range(0,5))
+    , '0,1,2,3,4,5'
+    , "implode(',',range(0,5))"
+    );
+  assertEquals(
+      implode(',',range(0,50,10))
+    , '0,10,20,30,40,50'
+    , "implode(',',range(0,50,10))"
+    );
+  assertEquals(
+      implode(',',range('a','e'))
+    , 'a,b,c,d,e'
+    , "implode(',',range('a','e'))"
+    );
+  assertEquals(
+      implode(',',range('A','E'))
+    , 'A,B,C,D,E'
+    , "implode(',',range('A','E'))"
+    );
 });
 
