@@ -11,6 +11,7 @@ import {
  , number_format
  , intval
  , ctype_digit
+ , implode
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -102,5 +103,9 @@ Deno.test('ctype_digit', function() {
   assertEquals(ctype_digit(true), false, "ctype_digit(true)");
   assertEquals(ctype_digit(false), false, "ctype_digit(false)");
   assertEquals(ctype_digit(null), false, "ctype_digit(null)");
+});
+
+Deno.test('implode', function() {
+  assertEquals(implode(',', ['a','b']), 'a,b', "implode(',', ['a','b'])");
 });
 

@@ -289,6 +289,17 @@ function ctype_digit(text:any) :boolean {
   return false;
 }
 
+// Join array elements with a string.
+//
+// @param string separator
+// @param array data
+// @return string
+// @link https://www.php.net/manual/en/function.implode.php
+
+function implode(separator:string, data:Array<string>) :string {
+  return data.join(separator);
+}
+
 export {
    strpos
  , strrpos
@@ -302,5 +313,6 @@ export {
  , number_format
  , intval
  , ctype_digit
+ , implode
 };
 
