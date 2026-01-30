@@ -300,28 +300,97 @@ function implode(separator:string, data:Array<number|string>) :string {
   return data.join(separator);
 }
 
-function range(
-    start:number|string
-  , end:number|string
+function range<T extends number|string>(
+    start:T
+  , end:T
   , step:number=1
   ) :Array<number>|Array<string> {
 
 
   if (typeof(start) == 'number' && typeof(end) == 'number') {
     const data :Array<number> = [];
-    for (let i = start; i < end + 1; i = i + step) {
+    for (let i :number = start; i < end + 1; i = i + step) {
       data.push(i);
     }
     return data;
   } else if (typeof(start) == 'string' && typeof(end) == 'string') {
     const data :Array<string> = [];
-    for (let i = start.charCodeAt(0); i < end.charCodeAt(0) + 1; i = i + step) {
+    for (let i :number = start.charCodeAt(0); i < end.charCodeAt(0) + 1; i = i + step) {
       data.push(String.fromCharCode(i));
     }
     return data;
   } else {
     throw new Error('start and end must both number or string.');
   }
+}
+
+// Checks if the given key or index exists in the array.
+//
+// @param string|number key
+// @param array array
+// @return boolean
+// @link https://www.php.net/manual/en/function.array-key-exists.php
+
+function array_key_exists(
+    k:string|number
+  , o:Record<string|number,any>
+  ) :boolean {
+  return o.hasOwnProperty(k);
+}
+
+// Strip whitespace (or other characters) from the beginning and end of
+// a string
+//
+// @param string string
+// @param string chars default '\n\r\t\v\x00'
+//
+//   * "\n"   LF
+//   * "\r"   CR
+//   * "\t"   TAB
+//   * "\v"   vertical tab
+//   * "\x00" NULL
+// @link https://www.php.net/manual/en/function.trim.php
+
+function trim(string:string, chars:string='\n\r\t\v\x00') :string {
+
+  const s :Array<string> = [];
+
+  let offset :number = 0;
+  let length :number = string.length;
+
+  // offset
+  for (let i = 0; i < string.length; i++) {
+    let char_count = 0;
+    for (let j = 0; j < chars.length; j++) {
+      if (string[i] == chars[j]) {
+        char_count++;
+        break;
+      }
+    }
+    if (char_count > 0) {
+      continue;
+    }
+    offset = i;
+    break;
+  }
+
+  // offset
+  for (let i = string.length - 1; i > -1; i--) {
+    let char_count = 0;
+    for (let j = 0; j < chars.length; j++) {
+      if (string[i] == chars[j]) {
+        char_count++;
+        break;
+      }
+    }
+    if (char_count > 0) {
+      continue;
+    }
+    length = i;
+    break;
+  }
+
+  return string.substring(offset, length + 1);
 }
 
 export {
@@ -339,5 +408,7 @@ export {
  , ctype_digit
  , implode
  , range
+ , array_key_exists
+ , trim
 };
 

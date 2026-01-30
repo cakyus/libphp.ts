@@ -13,6 +13,8 @@ import {
  , ctype_digit
  , implode
  , range
+ , array_key_exists
+ , trim
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -112,24 +114,41 @@ Deno.test('implode', function() {
 
 Deno.test('range', function() {
   assertEquals(
-      implode(',',range(0,5))
+      implode(',',range<number>(0,5))
     , '0,1,2,3,4,5'
     , "implode(',',range(0,5))"
     );
   assertEquals(
-      implode(',',range(0,50,10))
+      implode(',',range<number>(0,50,10))
     , '0,10,20,30,40,50'
     , "implode(',',range(0,50,10))"
     );
   assertEquals(
-      implode(',',range('a','e'))
+      implode(',',range<string>('a','e'))
     , 'a,b,c,d,e'
     , "implode(',',range('a','e'))"
     );
   assertEquals(
-      implode(',',range('A','E'))
+      implode(',',range<string>('A','E'))
     , 'A,B,C,D,E'
     , "implode(',',range('A','E'))"
     );
+});
+
+Deno.test('array_key_exists', function() {
+  assertEquals(array_key_exists('f', {f:0}), true);
+  assertEquals(array_key_exists('o', {f:0}), false);
+});
+
+Deno.test('trim', function() {
+  assertEquals(trim('1foo', '1'), 'foo', 'trim 1');
+  assertEquals(trim('foo1', '1'), 'foo', 'trim 2');
+  assertEquals(trim('1foo1', '1'), 'foo', 'trim 3');
+  assertEquals(trim('1foo', '123'), 'foo', 'trim 4');
+  assertEquals(trim('foo1', '123'), 'foo', 'trim 5');
+  assertEquals(trim('1foo1', '123'), 'foo', 'trim 6');
+  assertEquals(trim('12foo', '123'), 'foo', 'trim 7');
+  assertEquals(trim('foo12', '123'), 'foo', 'trim 8');
+  assertEquals(trim('12foo13', '123'), 'foo', 'trim 9');
 });
 
