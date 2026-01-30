@@ -15,6 +15,7 @@ import {
  , range
  , array_key_exists
  , trim
+ , rtrim
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -150,5 +151,17 @@ Deno.test('trim', function() {
   assertEquals(trim('12foo', '123'), 'foo', 'trim 7');
   assertEquals(trim('foo12', '123'), 'foo', 'trim 8');
   assertEquals(trim('12foo13', '123'), 'foo', 'trim 9');
+});
+
+Deno.test('rtrim', function() {
+  assertEquals(rtrim('1foo', '1'), '1foo', 'rtrim 1');
+  assertEquals(rtrim('foo1', '1'), 'foo', 'rtrim 2');
+  assertEquals(rtrim('1foo1', '1'), '1foo', 'rtrim 3');
+  assertEquals(rtrim('1foo', '123'), '1foo', 'rtrim 4');
+  assertEquals(rtrim('foo1', '123'), 'foo', 'rtrim 5');
+  assertEquals(rtrim('1foo1', '123'), '1foo', 'rtrim 6');
+  assertEquals(rtrim('12foo', '123'), '12foo', 'rtrim 7');
+  assertEquals(rtrim('foo12', '123'), 'foo', 'rtrim 8');
+  assertEquals(rtrim('12foo13', '123'), '12foo', 'rtrim 9');
 });
 

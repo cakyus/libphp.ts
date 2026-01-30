@@ -358,7 +358,7 @@ function trim(string:string, chars:string='\n\r\t\v\x00') :string {
   let offset :number = 0;
   let length :number = string.length;
 
-  // offset
+  // left trim
   for (let i = 0; i < string.length; i++) {
     let char_count = 0;
     for (let j = 0; j < chars.length; j++) {
@@ -374,7 +374,39 @@ function trim(string:string, chars:string='\n\r\t\v\x00') :string {
     break;
   }
 
-  // offset
+  // right trim
+  for (let i = string.length - 1; i > -1; i--) {
+    let char_count = 0;
+    for (let j = 0; j < chars.length; j++) {
+      if (string[i] == chars[j]) {
+        char_count++;
+        break;
+      }
+    }
+    if (char_count > 0) {
+      continue;
+    }
+    length = i;
+    break;
+  }
+
+  return string.substring(offset, length + 1);
+}
+
+// Strip whitespace (or other characters) from the end of a string
+//
+// @param string string
+// @param string chars default '\n\r\t\v\x00'
+// @link https://www.php.net/manual/en/function.trim.php
+
+function rtrim(string:string, chars:string='\n\r\t\v\x00') :string {
+
+  const s :Array<string> = [];
+
+  let offset :number = 0;
+  let length :number = string.length;
+
+  // right trim
   for (let i = string.length - 1; i > -1; i--) {
     let char_count = 0;
     for (let j = 0; j < chars.length; j++) {
@@ -410,5 +442,6 @@ export {
  , range
  , array_key_exists
  , trim
+ , rtrim
 };
 
