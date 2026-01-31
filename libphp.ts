@@ -425,6 +425,15 @@ function rtrim(string:string, chars:string='\n\r\t\v\x00') :string {
   return string.substring(offset, length + 1);
 }
 
+// Finds whether a variable is null
+//
+// @param mixed value
+// @return bool
+
+function is_null(value:any) :boolean {
+  return Object.is(value, null);
+}
+
 export {
    strpos
  , strrpos
@@ -443,5 +452,6 @@ export {
  , array_key_exists
  , trim
  , rtrim
+ , is_null
 };
 

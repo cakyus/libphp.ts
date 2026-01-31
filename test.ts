@@ -16,6 +16,7 @@ import {
  , array_key_exists
  , trim
  , rtrim
+ , is_null
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -163,5 +164,15 @@ Deno.test('rtrim', function() {
   assertEquals(rtrim('12foo', '123'), '12foo', 'rtrim 7');
   assertEquals(rtrim('foo12', '123'), 'foo', 'rtrim 8');
   assertEquals(rtrim('12foo13', '123'), '12foo', 'rtrim 9');
+});
+
+Deno.test('is_null', function() {
+  assertEquals(is_null(null), true, 'is_null null');
+  assertEquals(is_null(true), false, 'is_null true');
+  assertEquals(is_null(false), false, 'is_null false');
+  assertEquals(is_null([]), false, 'is_null array');
+  assertEquals(is_null(undefined), false, 'is_null undefined');
+  assertEquals(is_null(''), false, 'is_null string');
+  assertEquals(is_null(0), false, 'is_null number');
 });
 
