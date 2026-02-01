@@ -2,7 +2,7 @@
 
 Implemented Functions
 
-    strpos strrpos substr basename json_decode json_encode urlencode
-    rawurlencode time number_format intval ctype_digit implode range
-    array_key_exists trim rtrim is_null
+    array_key_exists array_push basename ctype_digit implode intval
+    is_null json_decode json_encode number_format range rawurlencode
+    rtrim strpos strrpos substr time trim urlencode
 

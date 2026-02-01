@@ -434,6 +434,25 @@ function is_null(value:any) :boolean {
   return Object.is(value, null);
 }
 
+// Push one or more elements onto the end of array
+//
+// @param array array
+//   The input array.
+// @param mixed values
+//   The values to push onto the end of the array.
+// @return int
+//   Returns the new number of elements in the array.
+// @link https://www.php.net/manual/en/function.array-push.php
+
+function array_push(data:Array<any>, ...values:any) :number {
+  let value_count :number = 0;
+  for (const value of values) {
+    data.push(value);
+    value_count++;
+  }
+  return value_count;
+}
+
 export {
    strpos
  , strrpos
@@ -453,5 +472,6 @@ export {
  , trim
  , rtrim
  , is_null
+ , array_push
 };
 

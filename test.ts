@@ -17,6 +17,7 @@ import {
  , trim
  , rtrim
  , is_null
+ , array_push
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -174,5 +175,10 @@ Deno.test('is_null', function() {
   assertEquals(is_null(undefined), false, 'is_null undefined');
   assertEquals(is_null(''), false, 'is_null string');
   assertEquals(is_null(0), false, 'is_null number');
+});
+
+Deno.test('array_push', function() {
+  assertEquals(array_push([], 1), 1, 'array_push 1');
+  assertEquals(array_push([], 1, 2), 2, 'array_push 2');
 });
 
