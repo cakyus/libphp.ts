@@ -453,6 +453,22 @@ function array_push(data:Array<any>, ...values:any) :number {
   return value_count;
 }
 
+// Checks if a value exists in an array
+//
+// @param mixed needle
+// @param array haystack
+// @param bool strict
+// @return bool
+// @link https://www.php.net/manual/en/function.in-array.php
+
+function in_array(
+    needle: any
+  , haystack: any[]
+  , strict: boolean = false
+  ) :boolean {
+  return haystack.includes(needle);
+}
+
 export {
    strpos
  , strrpos
@@ -473,5 +489,6 @@ export {
  , rtrim
  , is_null
  , array_push
+ , in_array
 };
 
