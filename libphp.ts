@@ -61,10 +61,6 @@ function substr(s:string, offset:number, length:number=0) :string {
     }
   }
 
-  console.log('-----');
-  console.log('begin_index', begin_index);
-  console.log('end_index', end_index);
-
   let t = '';
   for (let i = begin_index; i < end_index + 1; i++) {
     t += s[i];
