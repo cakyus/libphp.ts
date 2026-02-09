@@ -45,29 +45,28 @@ function strrpos(haystack:string, needle:string, offset:number=0) :number|false 
 
 function substr(s:string, offset:number, length:number=0) :string {
 
-  if (arguments.length == 2) {
-    length = s.length;
-  }
-
   let begin_index = offset;
-  let end_index = offset + length;
-
   if (begin_index < 0) {
-    begin_index = s.length + begin_index
-    end_index = begin_index + length;
+    begin_index = s.length + begin_index;
   }
 
-  if (end_index < 0) {
-    end_index = s.length + end_index
+  let end_index = s.length - 1;
+
+  if (arguments.length == 3) {
+    // length is specified
+    if (length < 0) {
+      end_index = s.length + length - 1;
+    } else {
+      end_index = begin_index + length - 1;
+    }
   }
 
-  // avoid outbound
-  if (end_index > s.length) {
-    end_index = s.length;
-  }
+  console.log('-----');
+  console.log('begin_index', begin_index);
+  console.log('end_index', end_index);
 
   let t = '';
-  for (let i = begin_index; i < end_index; i++) {
+  for (let i = begin_index; i < end_index + 1; i++) {
     t += s[i];
   }
 

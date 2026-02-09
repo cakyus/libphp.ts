@@ -45,6 +45,7 @@ Deno.test('substr', function() {
   assertEquals(substr('foo', -2), 'oo', 'negative offset 2');
   assertEquals(substr('GMT+0200', -5, 3), '+02', 'negative offset 2 with length');
   assertEquals(substr('0123456789', 5, 2), '56', 'offset 2 with length');
+  assertEquals(substr('0123456789', 1, -1), '12345678', 'offset 2 with length 2');
 });
 
 Deno.test('basename', function() {
