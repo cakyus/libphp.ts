@@ -50,8 +50,7 @@ function substr(s:string, offset:number, length:number=0) :string {
   }
 
   let begin_index = offset;
-  let end_index = length;
-
+  let end_index = offset + length;
 
   if (begin_index < 0) {
     begin_index = s.length + begin_index
@@ -470,25 +469,25 @@ function in_array(
 }
 
 export {
-   strpos
- , strrpos
- , substr
+   array_key_exists
+ , array_push
  , basename
- , json_decode
- , json_encode
- , urlencode
- , rawurlencode
- , time
- , number_format
- , intval
  , ctype_digit
  , implode
- , range
- , array_key_exists
- , trim
- , rtrim
- , is_null
- , array_push
  , in_array
+ , intval
+ , is_null
+ , json_decode
+ , json_encode
+ , number_format
+ , range
+ , rawurlencode
+ , rtrim
+ , strpos
+ , strrpos
+ , substr
+ , time
+ , trim
+ , urlencode
 };
 
