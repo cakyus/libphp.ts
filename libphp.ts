@@ -112,7 +112,7 @@ function basename(path:string, suffix:string='') :string {
 // @return mixed
 // @link https://www.php.net/manual/en/function.json-decode.php
 
-function json_decode(text:string) :object {
+function json_decode(text:string) {
   // remove NULL char at the end
   if (text.charCodeAt(text.length - 1) == 0) {
     text = text.substring(0, text.length - 1);
