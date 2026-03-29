@@ -8,10 +8,10 @@
 // @return int|false
 // @link https://www.php.net/manual/en/function.strpos.php
 
-function strpos(haystack:string, needle:string, offset:number=0) :number|false {
+function strpos(haystack:string, needle:string, offset:number=0) :number|undefined {
   const pos = haystack.indexOf(needle, offset);
   if (pos == -1) {
-    return false;
+    return undefined;
   }
   return pos;
 }
@@ -78,6 +78,7 @@ function substr(s:string, offset:number, length:number=0) :string {
 function strlen(text:string) :number {
   return text.length;
 }
+
 // Returns trailing name component of path.
 //
 // @param string path
