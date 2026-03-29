@@ -69,6 +69,15 @@ function substr(s:string, offset:number, length:number=0) :string {
   return t;
 }
 
+// Get string length
+//
+// @param string string
+// @return int
+// @link https://www.php.net/manual/en/function.strlen.php
+
+function strlen(text:string) :number {
+  return text.length;
+}
 // Returns trailing name component of path.
 //
 // @param string path
@@ -478,6 +487,7 @@ export {
  , range
  , rawurlencode
  , rtrim
+ , strlen
  , strpos
  , strrpos
  , substr
