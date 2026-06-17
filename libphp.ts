@@ -211,46 +211,62 @@ function number_format(
   , thousands_separator:string = ','
   ) :string {
 
-  // split integer and decimal
-  const s1 = n.toString().split('.');
-  let sinteger = s1[0];
-  let sdecimal = '';
-  if (s1.length == 2) {
-    sdecimal = s1[1];
+  // result
+  let snum :string = ''
+
+  // positive or negative
+  let sign :string = ''
+  if (n < 0) {
+    sign = '-'
+    n = Math.abs(n)
   }
 
-  // resize sdecimal according to decimal
-  sdecimal = sdecimal.substring(0, decimal);
-  if (sdecimal.length < decimal) {
-    // add '0' s
-    sdecimal = sdecimal + '0'.repeat(decimal - sdecimal.length);
+  // decimal
+  let ndec :number = n - Math.trunc(n)
+  let sdec :string = ''
+
+  const numbers :Array<number> = []
+
+  let reminder :number = 0
+  let devider :number = 1000
+  let level :number = 1
+
+  // convert to integer by subtracting with decimals
+  n = n - ndec
+
+  while (true) {
+    reminder = n % devider
+    numbers.push(reminder)
+    n = ( n - reminder ) / devider
+    if (n == 0) break
   }
 
-  // add thousand separator
-  let s :string = '';
-  let end_index :number = sinteger.length;
-  let begin_index :number = end_index - 3;
-  const counter :number = Math.ceil(sinteger.length / 3);
-  for (let i = 0; i < counter; i++) {
-    if (begin_index < 0) {
-      begin_index = 0;
-    }
+  numbers.reverse()
+  for (let i = 0; i < numbers.length; i++) {
+    let snumber = String(numbers[i])
     if (i > 0) {
-      s = sinteger.substring(begin_index, end_index)
-        + thousands_separator + s;
-    } else {
-      s = sinteger.substring(begin_index, end_index);
+      // 2nd element, 3rd element ..
+      snum += thousands_separator
+      snumber = '0'.repeat(3 - snumber.length) + snumber
     }
-    begin_index = begin_index - 3;
-    end_index = end_index - 3;
+    snum += snumber
   }
-  sinteger = s;
 
-  if (sdecimal.length > 0) {
-    return sinteger + decimal_separator + sdecimal;
-  } else {
-    return sinteger;
+  // decimal
+  if (decimal > 0) {
+    // round to decimal
+    ndec = Math.round(ndec * (10 ** decimal)) / (10 ** decimal)
+    // strip to number of decimals
+    const sdecs = String(ndec).split('.')
+    if (sdecs.length > 1) sdec = sdecs[1].substring(0, decimal)
+    // add zeros to fill number of digits
+    sdec = sdec + '0'.repeat(decimal - sdec.length)
+    // prefix the dot
+    sdec = decimal_separator + sdec
   }
+
+  return sign + snum + sdec
+
 }
 
 // Get the integer value of a variable
@@ -473,6 +489,18 @@ function in_array(
   return haystack.includes(needle);
 }
 
+// Sort array using specified collator
+//
+// @param array array
+// @param int flags
+// @return bool
+// @link https://www.php.net/manual/en/function.sort.php
+
+function sort<T>(items:Array<T>) :boolean {
+  items.sort();
+  return true;
+}
+
 export {
    array_key_exists
  , array_push
@@ -488,6 +516,7 @@ export {
  , range
  , rawurlencode
  , rtrim
+ , sort
  , strlen
  , strpos
  , strrpos

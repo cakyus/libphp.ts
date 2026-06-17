@@ -24,7 +24,7 @@ import {
 Deno.test('strpos', function() {
   assertEquals(strpos('foo', 'f'), 0);
   assertEquals(strpos('foo', 'o'), 1);
-  assertEquals(strpos('foo', 'b'), false);
+  assertEquals(strpos('foo', 'b'), undefined);
   assertEquals(strpos('foo bar buz', 'bar'), 4);
   assertEquals(strpos('foo bar buz', 'b', 5), 8, 'using offset');
 });
@@ -88,10 +88,12 @@ Deno.test('time', function() {
 });
 
 Deno.test('number_format', function() {
-  assertEquals(number_format(1.568, 2), '1.56');
+  assertEquals(number_format(1.568, 2), '1.57');
   assertEquals(number_format(128.85, 2), '128.85');
-  assertEquals(number_format(3092.4, 2), '3,092.40');
-  assertEquals(number_format(91025, 2), '91,025.00');
+  assertEquals(number_format(3_092.4, 2), '3,092.40');
+  assertEquals(number_format(91_025, 2), '91,025.00');
+  assertEquals(number_format(91_025, 0), '91,025');
+  assertEquals(number_format(-185_086, 0), '-185,086');
 });
 
 Deno.test('intval', function() {
