@@ -1,24 +1,26 @@
 // test.ts
 
 import { assertEquals } from "jsr:@std/assert";
+
 import {
-   strpos
- , strrpos
- , substr
- , basename
- , urlencode
- , rawurlencode
- , number_format
- , intval
- , ctype_digit
- , implode
- , range
- , array_key_exists
- , trim
- , rtrim
- , is_null
- , array_push
- , in_array
+    array_key_exists
+  , array_push
+  , array_unique
+  , basename
+  , ctype_digit
+  , implode
+  , in_array
+  , intval
+  , is_null
+  , number_format
+  , range
+  , rawurlencode
+  , rtrim
+  , strpos
+  , strrpos
+  , substr
+  , trim
+  , urlencode
 } from "./libphp.ts";
 
 Deno.test('strpos', function() {
@@ -190,5 +192,9 @@ Deno.test('array_push', function() {
 Deno.test('in_array', function() {
   assertEquals(in_array(1, []), false, 'in_array 1');
   assertEquals(in_array(1, [1, 2]), true, 'in_array 2');
+});
+
+Deno.test('array_unique', function() {
+  assertEquals(array_unique([1,2,2,3,1]), [1,2,3], 'array_unique 1');
 });
 

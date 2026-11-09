@@ -416,10 +416,10 @@ function trim(string:string, chars:string='\n\r\t\v\x00') :string {
 // Strip whitespace (or other characters) from the end of a string
 //
 // @param string string
-// @param string chars default '\n\r\t\v\x00'
+// @param string chars default ' \n\r\t\v\x00'
 // @link https://www.php.net/manual/en/function.trim.php
 
-function rtrim(string:string, chars:string='\n\r\t\v\x00') :string {
+function rtrim(string:string, chars:string=' \n\r\t\v\x00') :string {
 
   const s :Array<string> = [];
 
@@ -464,13 +464,29 @@ function is_null(value:any) :boolean {
 //   Returns the new number of elements in the array.
 // @link https://www.php.net/manual/en/function.array-push.php
 
-function array_push(data:Array<any>, ...values:any) :number {
+export function array_push(data:Array<any>, ...values:any) :number {
   let value_count :number = 0;
   for (const value of values) {
     data.push(value);
     value_count++;
   }
   return value_count;
+}
+
+// Removes duplicate values from an array
+//
+// @param array values
+// @param int flags default SORT_STRING
+// @return array
+// @link https://www.php.net/manual/en/function.array-unique.php
+
+export function array_unique<T=any>(values:Array<T>, flags:number=2) :Array<T> {
+  const output :Array<T> = []
+  for (const value of values) {
+    if (output.includes(value)) continue
+    output.push(value)
+  }
+  return output
 }
 
 // Checks if a value exists in an array
@@ -497,13 +513,12 @@ function in_array(
 // @link https://www.php.net/manual/en/function.sort.php
 
 function sort<T>(items:Array<T>) :boolean {
-  items.sort();
-  return true;
+  items.sort()
+  return true
 }
 
 export {
    array_key_exists
- , array_push
  , basename
  , ctype_digit
  , implode
@@ -524,5 +539,5 @@ export {
  , time
  , trim
  , urlencode
-};
+}
 
